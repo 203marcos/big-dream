@@ -1,203 +1,93 @@
-# 📱 Big Dream - Professional Network Mobile App
+# Big Dream - Professional Network Mobile App
 
-## 🚀 Overview
+## Overview
 
 Big Dream is a mobile application inspired by LinkedIn, designed to help users build their professional identity, showcase skills, and connect with other developers.
 
-This project focuses on modern Android development using Kotlin and clean architecture principles.
+Built with modern Android development using **Kotlin**, **Jetpack Compose**, and **Clean Architecture**.
 
----
+## Features
 
-## 🎯 Purpose
+- **Authentication** - Registration and login with JWT, persistent sessions via DataStore
+- **Profile** - Create/edit profile, manage skills, showcase projects
+- **Feed** - Create posts, like, and comment
+- **Connections** - Add and view connections
+- **Skill Progress** - Track skill evolution with progress tracking
 
-The goal of this project is to demonstrate real-world mobile development skills required for junior developer positions, including:
+## Tech Stack
 
-* API integration
-* Clean architecture
-* State management
-* Authentication
-* UI/UX design
+| Layer | Technology |
+|-------|-----------|
+| Language | Kotlin |
+| UI | Jetpack Compose + Material 3 |
+| Navigation | Navigation Compose |
+| Architecture | Clean Architecture + MVVM |
+| Networking | Retrofit + Kotlin Serialization |
+| Async | Coroutines + Flow |
+| DI | Hilt |
+| Local Storage | DataStore Preferences |
+| Backend | REST API (Java Spring Boot) + JWT |
 
----
-
-## 📱 Features
-
-### 🔐 Authentication
-
-* User registration
-* Login with JWT
-* Persistent session using DataStore
-
-### 👤 Profile
-
-* Profile creation and editing
-* Skills management
-* Projects showcase
-
-### 📰 Feed
-
-* Create posts
-* Like posts
-* Comment on posts
-
-### 🤝 Connections
-
-* Add connections
-* View connections list
-
-### 📊 Skill Progress (Differential)
-
-* Track skill evolution
-* Progress bars
-* Learning history
-
-### 🔔 Notifications (Optional)
-
-* New connections
-* New interactions
-
----
-
-## 🧱 Architecture
-
-This project follows **Clean Architecture + MVVM**:
+## Project Structure
 
 ```
-presentation/
-  view/
-  viewmodel/
-
-domain/
-  model/
-  usecase/
-
-data/
-  repository/
-  remote/
-  local/
+app/src/main/java/com/bigdream/
+├── di/                  # Hilt dependency injection modules
+├── data/                # Data layer
+│   ├── remote/
+│   │   ├── api/         # Retrofit API interfaces
+│   │   └── dto/         # Data Transfer Objects
+│   ├── local/           # DataStore, local storage
+│   └── repository/      # Repository implementations
+├── domain/              # Domain layer (pure Kotlin, no Android deps)
+│   ├── model/           # Domain models
+│   ├── repository/      # Repository interfaces
+│   └── usecase/         # Business logic use cases
+└── presentation/        # Presentation layer
+    ├── ui/
+    │   ├── screens/     # Compose screens (auth, feed, profile, connections)
+    │   ├── components/  # Reusable UI components
+    │   ├── navigation/  # Navigation routes
+    │   └── theme/       # Material theme
+    └── viewmodel/       # ViewModels
 ```
 
-### Layers
-
-* **Presentation**: UI and ViewModels
-* **Domain**: Business logic
-* **Data**: API and local database
-
----
-
-## ⚙️ Tech Stack
-
-### Mobile
-
-* Kotlin
-* Jetpack Compose
-* Navigation Compose
-
-### Networking
-
-* Retrofit
-* Gson / Moshi
-
-### Async
-
-* Coroutines
-* Flow
-
-### Local Storage
-
-* DataStore
-* Room (optional)
-
-### Backend Integration
-
-* REST API (Java Spring Boot)
-* JWT Authentication
-
----
-
-## 🔌 API Endpoints (Example)
-
-### Auth
-
-* POST /auth/register
-* POST /auth/login
-
-### Users
-
-* GET /users/{id}
-* PUT /users/{id}
-
-### Posts
-
-* GET /posts
-* POST /posts
-* POST /posts/{id}/like
-
-### Connections
-
-* POST /connections
-* GET /connections
-
----
-
-## 🛠️ Setup & Installation
+## Setup
 
 ### Requirements
 
-* Android Studio
-* JDK 17+
-* Backend API running
+- Android Studio (Hedgehog or newer)
+- JDK 17+
+- Backend API running (the app points to `http://10.0.2.2:8080/api/` by default — this maps to `localhost` on the Android emulator)
 
-### Steps
+### Run
+
+1. Clone the repository
+2. Open in Android Studio
+3. Sync Gradle
+4. Run on emulator or device
+
+### Run Tests
 
 ```bash
-git clone https://github.com/your-username/big-dream-mobile
-cd big-dream-mobile
+./gradlew test           # Unit tests
+./gradlew connectedCheck # Instrumented tests (requires device/emulator)
 ```
 
-Open in Android Studio and run the project.
+## API Endpoints
 
----
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /auth/register | Register new user |
+| POST | /auth/login | Login |
+| GET | /users/{id} | Get user profile |
+| PUT | /users/{id} | Update profile |
+| GET | /posts | Get feed |
+| POST | /posts | Create post |
+| POST | /posts/{id}/like | Like a post |
+| GET | /connections | List connections |
+| POST | /connections/{userId} | Add connection |
 
-## 🧪 Testing
+## Authors
 
-* Manual testing
-* API testing with Postman
-* (Optional) UI tests with Espresso
-
----
-
-## ☁️ Future Improvements
-
-* Firebase push notifications
-* Dark mode
-* Real-time updates (WebSocket)
-* Image upload (AWS S3)
-
----
-
-## 📸 Screenshots
-
-> Add screenshots here
-
----
-
-## 📄 Documentation
-
-* Architecture decisions
-* API contracts
-* User flows
-
----
-
-## 👨‍💻 Author
-
-Marcos Dias
-
----
-
-## ⭐ Final Notes
-
-This project was built to simulate a real production-level mobile application and demonstrate readiness for a junior developer role.
-
-If you found this project useful, feel free to give it a star ⭐
+Marcos Dias & Hugo Prado
